@@ -33,7 +33,7 @@ const AIChatbot: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
       const systemPrompt = `You are the AI Assistant for ${BRAND_NAME} in ${LOCATION}. 
       Our slogan is "${SLOGAN}". We are a 100% Halal certified butchery.
       Your goal is to help customers with questions about meat cuts (Beef, Mbuzi, Poultry, Lamb), 
@@ -75,8 +75,8 @@ const AIChatbot: React.FC = () => {
               <span className="font-bold text-sm">Madina Assistant</span>
             </div>
             <div className="flex items-center space-x-3">
-              <select 
-                value={language} 
+              <select
+                value={language}
                 onChange={(e) => setLanguage(e.target.value as Language)}
                 className="bg-white/10 text-[10px] font-bold uppercase tracking-wider rounded px-2 py-1 outline-none border border-white/20"
               >
@@ -100,11 +100,10 @@ const AIChatbot: React.FC = () => {
             )}
             {messages.map((m, i) => (
               <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[85%] p-3 rounded-2xl text-sm ${
-                  m.role === 'user' 
-                  ? 'bg-rose-600 text-white rounded-tr-none' 
-                  : 'bg-white text-slate-700 shadow-sm border border-slate-100 rounded-tl-none'
-                }`}>
+                <div className={`max-w-[85%] p-3 rounded-2xl text-sm ${m.role === 'user'
+                    ? 'bg-rose-600 text-white rounded-tr-none'
+                    : 'bg-white text-slate-700 shadow-sm border border-slate-100 rounded-tl-none'
+                  }`}>
                   {m.text}
                 </div>
               </div>
@@ -122,15 +121,15 @@ const AIChatbot: React.FC = () => {
 
           {/* Input */}
           <div className="p-4 bg-white border-t border-slate-100 flex space-x-2">
-            <input 
-              type="text" 
+            <input
+              type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSend()}
               placeholder={language === 'Swahili' ? 'Andika hapa...' : 'Type a message...'}
               className="flex-grow bg-slate-100 rounded-full px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-rose-600/20"
             />
-            <button 
+            <button
               onClick={handleSend}
               disabled={isLoading || !input.trim()}
               className="bg-rose-600 text-white p-2 rounded-full hover:bg-rose-700 disabled:opacity-50 transition-colors"
@@ -142,7 +141,7 @@ const AIChatbot: React.FC = () => {
           </div>
         </div>
       ) : (
-        <button 
+        <button
           onClick={() => setIsOpen(true)}
           className="bg-rose-900 text-white p-4 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all group relative"
         >
